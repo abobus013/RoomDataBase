@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My languages</string>
+    <string name="Name">名前</string>
+    <string name="Surname">姓</string>
+    <string name="Add">追加</string>
+</resources>
