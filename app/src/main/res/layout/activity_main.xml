@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik"
+        android:text="@string/tv_empty"
+        android:textColor="#4CAF50"
+        android:textSize="34sp"
+        android:translationZ="18dp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bg_bar" />
+
 
     <View
         android:id="@+id/bg_bar"
@@ -31,12 +47,12 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_students"
+        android:id="@+id/rv_notes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        tools:listitem="@layout/item_students"
+        tools:listitem="@layout/item_notes"
         app:layout_constraintTop_toBottomOf="@id/bg_bar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

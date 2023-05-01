@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddStudentActivity">
-
+    tools:context=".ui.add.AddStudentActivity">
 
     <Button
         android:id="@+id/btn_change"
@@ -36,7 +35,6 @@
         android:layout_margin="8dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_back"
-        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="@id/bg_bar"
         app:layout_constraintTop_toTopOf="@id/bg_bar"
         app:layout_constraintBottom_toBottomOf="@id/bg_bar"

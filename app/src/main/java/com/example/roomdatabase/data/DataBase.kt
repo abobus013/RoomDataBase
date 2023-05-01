@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.roomdatabase.dao.StudentsDao
+import com.example.roomdatabase.data.dao.NotesDao
+import com.example.roomdatabase.data.model.MyNote
 
-@Database(entities = [Student::class], version = 1)
+@Database(entities = [MyNote::class], version = 2)
 abstract class DataBase: RoomDatabase() {
 
-    abstract fun getStudentsDao(): StudentsDao
+    abstract fun getNotesDao(): NotesDao
 
 
     companion object {

@@ -1,39 +1,40 @@
-package com.example.roomdatabase
+package com.example.roomdatabase.ui.add
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withCreated
-import com.example.roomdatabase.adapters.StudentsAdapter
-import com.example.roomdatabase.dao.StudentsDao
-import com.example.roomdatabase.data.DataBase
-import com.example.roomdatabase.data.Student
-import com.example.roomdatabase.databinding.ActivityMainBinding
+import com.example.roomdatabase.R
+import com.example.roomdatabase.data.model.MyNote
 import com.example.roomdatabase.databinding.ActivitySearchBinding
-import kotlinx.coroutines.Dispatchers
+import com.example.roomdatabase.repositories.MainViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class AddStudentActivity : AppCompatActivity() {
 
-    private lateinit var dao: StudentsDao
+    private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivitySearchBinding
     private lateinit var mBn: Button
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         loadLocate()
         setContentView(binding.root)
         supportActionBar?.title = resources.getString(R.string.app_name)
+
+        viewModel = ViewModelProvider(
+            this, ViewModelProvider.AndroidViewModelFactory(application)
+        )[MainViewModel::class.java]
 
         mBn = binding.btnChange
 
@@ -56,9 +57,6 @@ class AddStudentActivity : AppCompatActivity() {
             binding.btnAdd.text = "Add"
         }
 
-        dao = DataBase.getInstance(this).getStudentsDao()
-
-
         binding.ivBack.setOnClickListener {
             finish()
         }
@@ -70,30 +68,29 @@ class AddStudentActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 if (isEdit) {
                     if (name.isNotEmpty() && surname.isNotEmpty()) {
-                        dao.updateStudents(Student(studentId, name, surname, ))
+                        viewModel.updateNotes(MyNote(studentId, name, surname))
                     } else {
                         Toast.makeText(
                             this@AddStudentActivity, "Ввидите данные", Toast.LENGTH_SHORT
                         ).show()
 
                     }
-
                     Toast.makeText(this@AddStudentActivity, "успешно обновлено", Toast.LENGTH_SHORT)
                         .show()
                     finish()
                 } else {
                     if (name.isNotEmpty() && surname.isNotEmpty()) {
-                        dao.addStudents(Student(0, name, surname))
+                        viewModel.addNote(MyNote(0, name, surname))
                     } else {
                         Toast.makeText(
                             this@AddStudentActivity, "Ввидите данные", Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
+                finish()
             }
         }
     }
-
     private fun showChangeLang() {
         val listItem = arrayOf("Français","日本","Русский","o'zbek")
 
